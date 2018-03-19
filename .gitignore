@@ -1,3 +1,9 @@
+_pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
 # Prerequisites
 *.d
 
