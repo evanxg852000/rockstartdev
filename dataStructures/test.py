@@ -3,6 +3,7 @@ import unittest
 from linkedlist import LinkedList
 from stack import Stack
 from queue import Queue
+from set import Set
 
 class LinkedListTest(unittest.TestCase):
     def test_features(self):
@@ -53,6 +54,27 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(qe.dequeue(),3)
         self.assertEqual(qe.dequeue(),12)
         self.assertEqual(qe.count(), 2)
+        self.assertEqual([x for x in qe.items()], [5,17])
+
+class SetTest(unittest.TestCase):
+    def test_features(self):
+        st = Set()
+        st.add(3)
+        st.add(5)
+        st.add(3)
+        st.add(12)
+        st.add(15)
+        self.assertEqual(st.count(), 4)
+        self.assertEqual(st.has(5), True)
+        self.assertEqual(st.has(8), False)
+        self.assertEqual([x for x in st.items()], [3,5,12, 15])
+        st1 = Set()
+        st1.add(3)
+        st1.add(5)
+        self.assertEqual(st1.is_subset(st), True)
+        self.assertEqual([x for x in (st.union(st1)).items()], [3,5,12,15])
+        self.assertEqual([x for x in (st.intersect(st1)).items()], [3,5])
+        self.assertEqual([x for x in (st.diff(st1)).items()], [12,15])
 
 
 if __name__ == '__main__':

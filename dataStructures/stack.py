@@ -19,7 +19,8 @@ class Stack(object):
         return None
 
     def items(self):
-        return self._store.items()
+        for i in self._store.items():
+            yield i.data
 
     def count(self):
         return self._store.count()
