@@ -4,6 +4,7 @@ from linkedlist import LinkedList
 from stack import Stack
 from queue import Queue
 from set import Set
+from hashtable import HashTable, HashSet
 
 class LinkedListTest(unittest.TestCase):
     def test_features(self):
@@ -76,6 +77,35 @@ class SetTest(unittest.TestCase):
         self.assertEqual([x for x in (st.intersect(st1)).items()], [3,5])
         self.assertEqual([x for x in (st.diff(st1)).items()], [12,15])
 
+class HashTableTest(unittest.TestCase):
+    def test_feautures(self):
+        ht = HashTable()
+        ht.put('Evance', 13)
+        ht.put('Alex', 18)
+        ht.put('Frank', 15)
+        ht.put('Liz', 13)
+        ht.put('Frank', 14)
+        self.assertEqual(ht.count(), 5)
+        self.assertEqual(ht.has('Frank'), True)
+        self.assertEqual([(x.key, x.val) for x in ht.get('Frank')], [('Frank', 15),('Frank', 14)])
+        ht.delete('Frank')
+        self.assertEqual(ht.count(), 3)
+        self.assertEqual(ht.has('Frank'), False)
+
+class HashSetTest(unittest.TestCase):
+    def test_features(self):
+        hs = HashSet()
+        hs.put('Evance', 13)
+        hs.put('Alex', 18)
+        hs.put('Frank', 15)
+        hs.put('Liz', 13)
+        hs.put('Frank', 14)
+        self.assertEqual(hs.count(), 4)
+        self.assertEqual(hs.has('Frank'), True)
+        self.assertEqual((hs.get('Frank').key, hs.get('Frank').val), ('Frank', 15))
+        hs.delete('Frank')
+        self.assertEqual(hs.count(), 3)
+        self.assertEqual(hs.has('Frank'), False)
 
 if __name__ == '__main__':
     unittest.main()
