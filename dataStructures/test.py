@@ -1,4 +1,5 @@
 import unittest
+import pdb
 
 from linkedlist import LinkedList
 from stack import Stack
@@ -6,6 +7,7 @@ from queue import Queue
 from set import Set
 from hashtable import HashTable, HashSet
 from binarytree import BinaryTree
+from trie import Trie
 
 class LinkedListTest(unittest.TestCase):
     def test_features(self):
@@ -136,6 +138,17 @@ class BinaryTreeTest(unittest.TestCase):
         self.assertEqual([x for x in bt.items()], [4, 6, 8, 15, 18, 21])
         self.assertEqual([x for x in bt.items('pre')], [15, 6, 4, 8, 18, 21])
         self.assertEqual([x for x in bt.items('post')], [4, 8, 6, 21, 18, 15])
+
+class TrieTest(unittest.TestCase):
+    def test_features(self):
+        tr = Trie('the')
+        tr.add('bar')
+        tr.add('batt')
+        tr.add('at')
+        self.assertEqual(tr.count(), 4)
+        self.assertEqual(tr.has('att'), False)
+        self.assertEqual(tr.has('bar'), True)
+        self.assertEqual(tr.has('value'), False)
 
 
 if __name__ == '__main__':

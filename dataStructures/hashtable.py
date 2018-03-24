@@ -7,6 +7,8 @@ class Pair(object):
         self.val = val
 
     def __eq__(self, other):
+        if other == None:
+            return False
         return self.key == other.key
 
 class HashTable(object):
