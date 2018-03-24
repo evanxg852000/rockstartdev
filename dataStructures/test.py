@@ -5,12 +5,17 @@ from stack import Stack
 from queue import Queue
 from set import Set
 from hashtable import HashTable, HashSet
+from binarytree import BinaryTree
 
 class LinkedListTest(unittest.TestCase):
     def test_features(self):
         ll = LinkedList()
         self.assertEqual(ll.front(), None)
         self.assertEqual(ll.back(), None)
+
+        ll = LinkedList(3)
+        self.assertEqual(ll.front().data, 3)
+        self.assertEqual(ll.back().data, 3)
 
         ll.add_front(12)
         ll.add_front(22)
@@ -23,12 +28,12 @@ class LinkedListTest(unittest.TestCase):
         self.assertEqual(ll.find(11), None)
         self.assertNotEqual(ll.find(7), None)
 
-        self.assertEqual(ll.count(), 4)
+        self.assertEqual(ll.count(), 5)
         ll.delete(ll.find(7))
         self.assertEqual(ll.back().data, 14)
-        self.assertEqual(ll.count(), 3)
+        self.assertEqual(ll.count(), 4)
 
-        self.assertEqual([x.data for x in ll.items()], [22, 12, 14])
+        self.assertEqual([x.data for x in ll.items()], [22, 12, 3, 14])
 
 
 class StackTest(unittest.TestCase):
@@ -106,6 +111,32 @@ class HashSetTest(unittest.TestCase):
         hs.delete('Frank')
         self.assertEqual(hs.count(), 3)
         self.assertEqual(hs.has('Frank'), False)
+
+class BinaryTreeTest(unittest.TestCase):
+    def test_features(self):
+        bt = BinaryTree(10)
+        bt.add(6)
+        bt.add(18)
+        bt.add(4)
+        bt.add(8)
+        bt.add(15)
+        bt.add(21)
+
+        self.assertEqual(bt.count(), 7)
+        self.assertEqual(bt.min(), 4)
+        self.assertEqual(bt.max(), 21)
+        self.assertEqual(bt.has(8), True)
+        self.assertEqual(bt.has(11), False)
+        self.assertNotEqual(bt.find(15), None)
+        self.assertEqual(bt.find(11), None)
+        bt.delete(10)
+        self.assertEqual(bt.root.data, 15)
+        self.assertEqual(bt.find(10), None)
+        self.assertEqual(bt.count(), 6)
+        self.assertEqual([x for x in bt.items()], [4, 6, 8, 15, 18, 21])
+        self.assertEqual([x for x in bt.items('pre')], [15, 6, 4, 8, 18, 21])
+        self.assertEqual([x for x in bt.items('post')], [4, 8, 6, 21, 18, 15])
+
 
 if __name__ == '__main__':
     unittest.main()

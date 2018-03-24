@@ -9,10 +9,10 @@ class LinkedList(object):
 
     def __init__(self, data = None):
         self.size = 0
+        self.head = self.tail = None
         if (data != None):
             self.size +=1
             self.head = self.tail = Node(data)
-        self.head = self.tail = None
 
     def front(self):
         return self.head
