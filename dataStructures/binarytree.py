@@ -1,3 +1,4 @@
+from queue import Queue
 
 class Node(object):
     def __init__(self, data = None, left = None, right = None):
@@ -79,13 +80,13 @@ class BinaryTree(object):
         return self.size
 
     def items(self, mode='in'):
-        if mode == 'level':
+        if mode == 'lev':
             return self.__level_order(self.root)
         if mode == 'pre':
             return self.__pre_order(self.root)
         if mode == 'in':
             return self.__in_order(self.root)
-        if mode == 'post':
+        if mode == 'pos':
             return self.__post_order(self.root)
 
     def __delete(self, node, data):
@@ -118,8 +119,16 @@ class BinaryTree(object):
     def __height(self):
         pass
 
-    def __level_order(self, height):
-        pass
+    def __level_order(self, root):
+        q = Queue()
+        q.enqueue(root)
+        while q.count() != 0:
+            node = q.dequeue()
+            yield node.data
+            if node.left != None:
+                q.enqueue(node.left)
+            if node.right != None:
+                q.enqueue(node.right)
 
     def __pre_order(self, curr):
         if curr != None:

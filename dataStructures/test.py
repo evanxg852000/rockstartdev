@@ -1,5 +1,4 @@
 import unittest
-import pdb
 
 from linkedlist import LinkedList
 from stack import Stack
@@ -137,7 +136,8 @@ class BinaryTreeTest(unittest.TestCase):
         self.assertEqual(bt.count(), 6)
         self.assertEqual([x for x in bt.items()], [4, 6, 8, 15, 18, 21])
         self.assertEqual([x for x in bt.items('pre')], [15, 6, 4, 8, 18, 21])
-        self.assertEqual([x for x in bt.items('post')], [4, 8, 6, 21, 18, 15])
+        self.assertEqual([x for x in bt.items('pos')], [4, 8, 6, 21, 18, 15])
+        self.assertEqual([x for x in bt.items('lev')], [15, 6, 18, 4, 8, 21])
 
 class TrieTest(unittest.TestCase):
     def test_features(self):
