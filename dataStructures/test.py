@@ -7,6 +7,7 @@ from set import Set
 from hashtable import HashTable, HashSet
 from binarytree import BinaryTree
 from trie import Trie
+from heap import Heap
 
 class LinkedListTest(unittest.TestCase):
     def test_features(self):
@@ -149,6 +150,27 @@ class TrieTest(unittest.TestCase):
         self.assertEqual(tr.has('att'), False)
         self.assertEqual(tr.has('bar'), True)
         self.assertEqual(tr.has('value'), False)
+
+class HeapTest(unittest.TestCase):
+    def test_features(self):
+        pq = Heap()
+        self.assertEqual(pq.isEmpty(), True)
+        pq.insert(37)
+        pq.insert(17)
+        pq.insert(81)
+        pq.insert(74)
+        pq.insert(95)
+        pq.insert(52)
+        pq.insert(83)
+        pq.insert(41)
+        self.assertEqual(pq.count(), 8)
+        self.assertEqual(pq.remove(), 95)
+        self.assertEqual(pq.count(), 7)
+        self.assertEqual(pq.peek(), 83)
+        self.assertEqual(pq.remove(), 83)
+        self.assertEqual(pq.count(), 6)
+        self.assertEqual(pq.peek(), 81)
+        self.assertEqual(pq.isEmpty(), False)
 
 
 if __name__ == '__main__':
