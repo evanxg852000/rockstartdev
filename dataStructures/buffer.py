@@ -15,6 +15,14 @@ class CircularBuffer(object):
         self._store[self._high] = data
         self._high = (self._high + 1) % self._size
 
+    def remove(self):
+        if self.isEmpty():
+            raise Exception('Cannot remove on empty buffer')
+        value = self._store[self._low]
+        self._low = (self._low + 1) % self._size
+        self._count -= 1
+        return value
+
     def isEmpty(self):
         return self._count == 0
 
