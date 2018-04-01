@@ -8,6 +8,7 @@ from hashtable import HashTable, HashSet
 from binarytree import BinaryTree
 from trie import Trie
 from heap import Heap
+from buffer import CircularBuffer
 
 class LinkedListTest(unittest.TestCase):
     def test_features(self):
@@ -171,6 +172,23 @@ class HeapTest(unittest.TestCase):
         self.assertEqual(pq.count(), 6)
         self.assertEqual(pq.peek(), 81)
         self.assertEqual(pq.isEmpty(), False)
+
+class CircularBufferTest(unittest.TestCase):
+    def test_features(self):
+        cbf = CircularBuffer(4)
+        self.assertEqual(cbf.isEmpty(), True)
+        cbf.push(3)
+        cbf.push(4)
+        cbf.push(5)
+        self.assertEqual(cbf.isEmpty(), False)
+        self.assertEqual(cbf.count(), 3)
+        self.assertEqual(list(cbf.items()), [3,4,5])
+        cbf.push(6)
+        self.assertEqual(list(cbf.items()), [3,4,5,6])
+        cbf.push(7)
+        cbf.push(8)
+        self.assertEqual(list(cbf.items()), [5,6,7,8])
+
 
 
 if __name__ == '__main__':
