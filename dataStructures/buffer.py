@@ -2,32 +2,32 @@
 class CircularBuffer(object):
     def __init__(self, size):
         self._store = [None]*size
+        self._size = size
         self._low = 0
         self._high = 0
-        self._size = 0
+        self._count = 0
 
-    def push(self, data):
-        if self._size < len(self._store):
-            self._store[self._high]= data
-            self._high += 1
-            self._size += 1
+    def add(self, data):
+        if self.isFull():
+            self._low = (self._low + 1) % self._size
         else:
-            self._high = self._low
-            self._low += 1
-            self._store[self._high] = data
+            self._count += 1
+        self._store[self._high] = data
+        self._high = (self._high + 1) % self._size
 
     def isEmpty(self):
-        return self._size == 0
+        return self._count == 0
+
+    def isFull(self):
+        return self._size == self._count
 
     def count(self):
-        return self._size
+        return self._count
 
     def items(self):
-        if self._low < self._high:
-            for data in self._store[self._low: self._high]:
-                yield data
-        else:
-            for data in self._store[self._low:]:
-                yield data
-            for data in self._store[:self._high + 1]:
-                yield data
+        idx = self._low
+        num = self._count
+        while num > 0:
+            yield self._store[idx]
+            idx = (idx + 1) % self._size
+            num -= 1
