@@ -1,0 +1,16 @@
+{
+  "name": "code-bootcamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "check": "jest",
+    "test": "jest ./src"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^23.4.1",
+    "mocha": "^5.2.0"
+  }
+}
