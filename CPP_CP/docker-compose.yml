@@ -1,0 +1,11 @@
+version: '3'
+services:
+   cppapp:
+    build: .
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/usr/project/
+    environment:
+      - PORT=8888
+    
