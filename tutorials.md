@@ -1,4 +1,4 @@
-**[[Submit tutorial](https://github.com/danistefanovic/build-your-own-x/issues/new)]**
+**[[Original repo](https://github.com/danistefanovic/build-your-own-x)]**
 
 # ![Build your own X](feynman.png)
 
