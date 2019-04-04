@@ -3,9 +3,9 @@ services:
    cppapp:
     build: .
     ports:
-      - "8888:8888"
+      - "8888:8080"
     volumes:
       - ./:/usr/project/
     environment:
-      - PORT=8888
+      - PORT=8080
     

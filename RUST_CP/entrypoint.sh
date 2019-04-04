@@ -14,12 +14,6 @@ show_help() {
   """
 }
 
-build(){
-    cd "/build"
-    cmake ..
-    cmake --build .
-}
-
 case "$1" in
 
   bash )
@@ -31,15 +25,15 @@ case "$1" in
   ;;
 
   build )
-    build
+    eval "cargo build ${@:2}"
   ;;
 
   test )
-    eval "./build/tests/tests ${@:2}"
+    eval "cargo test ${@:2}"
   ;;
 
   run )
-    eval "./build/main/app ${@:2}"
+    eval "./target/release/app ${@:2}"
   ;;
 
   * )
