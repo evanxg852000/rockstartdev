@@ -10,12 +10,12 @@ show_help() {
   eval          : eval shell command
   build         : build the app [arg: path to cmake folder] 
   run           : run the application [arg: path to program] 
-  run           : test the application  
+  test          : test the application  
   """
 }
 
 build(){
-    cd "/build"
+    cd "./build"
     cmake ..
     cmake --build .
 }
