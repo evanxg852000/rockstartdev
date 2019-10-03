@@ -1,0 +1,25 @@
+TARGET = Some("x86_64-apple-darwin")
+OPT_LEVEL = Some("0")
+HOST = Some("x86_64-apple-darwin")
+CC_x86_64-apple-darwin = None
+CC_x86_64_apple_darwin = None
+HOST_CC = None
+CC = None
+CFLAGS_x86_64-apple-darwin = None
+CFLAGS_x86_64_apple_darwin = None
+HOST_CFLAGS = None
+CFLAGS = None
+CRATE_CC_NO_DEFAULTS = None
+DEBUG = Some("true")
+CARGO_CFG_TARGET_FEATURE = Some("fxsr,sse,sse2,sse3,ssse3")
+running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-m64" "-DMINIZ_NO_STDIO" "-DMINIZ_NO_ARCHIVE_APIS" "-DMINIZ_NO_ARCHIVE_WRITING_APIS" "-DMINIZ_NO_TIME" "-DMINIZ_NO_ZLIB_COMPATIBLE_NAMES" "-o" "/Users/evance.soumaoro/Desktop/rockstartdev/rust-c8/target/debug/build/miniz-sys-7923558c2385c6d9/out/miniz.o" "-c" "miniz.c"
+exit code: 0
+AR_x86_64-apple-darwin = None
+AR_x86_64_apple_darwin = None
+HOST_AR = None
+AR = None
+running: "ar" "crs" "/Users/evance.soumaoro/Desktop/rockstartdev/rust-c8/target/debug/build/miniz-sys-7923558c2385c6d9/out/libminiz.a" "/Users/evance.soumaoro/Desktop/rockstartdev/rust-c8/target/debug/build/miniz-sys-7923558c2385c6d9/out/miniz.o"
+exit code: 0
+cargo:rustc-link-lib=static=miniz
+cargo:rustc-link-search=native=/Users/evance.soumaoro/Desktop/rockstartdev/rust-c8/target/debug/build/miniz-sys-7923558c2385c6d9/out
+cargo:root=/Users/evance.soumaoro/Desktop/rockstartdev/rust-c8/target/debug/build/miniz-sys-7923558c2385c6d9/out
