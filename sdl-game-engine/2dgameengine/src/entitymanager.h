@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <optional>
 
 #include <SDL2/SDL.h>
 
@@ -19,7 +20,7 @@ public:
     void render(SDL_Renderer *renderer);
     bool hasNoEntity() const noexcept;
     Entity& addEntity(std::string entityName, LayerType layer);
-    Entity& getEntity(std::string entityName);
+    Entity* getEntity(std::string entityName);
     CollisionType checkEntityCollisions() const;
     std::vector<Entity*> getEntities() const;
     std::vector<Entity*> getEntitiesByLayer(LayerType layer) const;

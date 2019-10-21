@@ -40,11 +40,12 @@ Entity& EntityManager::addEntity(std::string entityName, LayerType layer){
     return *entity;
 }
 
-Entity& EntityManager::getEntity(std::string entityName){
+Entity* EntityManager::getEntity(std::string entityName){
     for(auto& entity : entities){
         if(entity->getName() == entityName)
-            return *entity;
+            return entity;
     }
+    return NULL;
 }
 
 CollisionType EntityManager::checkEntityCollisions() const{

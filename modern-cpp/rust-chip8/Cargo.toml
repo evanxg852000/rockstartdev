@@ -1,0 +1,8 @@
+[package]
+name = "rust-chip8"
+version = "0.1.0"
+authors = ["Alexandru <alex.ene0x11@gmail.com>"]
+
+[dependencies]
+minifb = "0.10.4"
+rand = "0.3"

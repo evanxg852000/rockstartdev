@@ -1,4 +1,4 @@
-FROM gcc:7.3.0
+FROM gcc:9.2.0
 
 RUN apt-get -qq update
 RUN apt-get -qq upgrade

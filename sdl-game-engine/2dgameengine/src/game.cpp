@@ -21,7 +21,7 @@ Game::Game(): ticksLastFrame{0}, running{false},
 
 Game::~Game(){
     manager.clearData();
-    delete map;
+    if(map != NULL) delete map;
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -70,10 +70,8 @@ void Game::loadLevel(int levelNumber) {
     sol::state lua;
     lua.open_libraries(sol::lib::base, sol::lib::os, sol::lib::math);
     std::string levelName = "Level"+ std::to_string(levelNumber);
-    lua.script("p = 3 + 5");
-    //lua.script_file("./assets/scripts/" + levelName + ".lua");
+    lua.script_file("./assets/scripts/" + levelName + ".lua");
 
-/*
     sol::table levelData = lua[levelName];
     sol::table levelAssets = levelData["assets"];
 
@@ -113,56 +111,56 @@ void Game::loadLevel(int levelNumber) {
         static_cast<int>(levelMap["mapSizeY"])
     );
 
-    */
-
-    /*
-    assetManager.addTexture("tank-image", "./assets/images/tank-big-right.png");
-    assetManager.addTexture("chopper-image", "./assets/images/chopper-spritesheet.png");
-    assetManager.addTexture("radar-image", "./assets/images/radar.png");
-    assetManager.addTexture("jungle-tiletexture", "./assets/tilemaps/jungle.png");
-    assetManager.addTexture("collider-box", "./assets/images/collision-texture.png");
-    assetManager.addTexture("heliport-image", "./assets/images/heliport.png");
-    assetManager.addTexture("projectile-image", "./assets/images/bullet-enemy.png");
-    assetManager.addFont("charriot-font", "./assets/fonts/charriot.ttf", 14);
-
-    map = new Map{assetManager, manager, 2, 32};
-    map->loadMap("./assets/tilemaps/jungle.map", 25, 20);
-
-    ColliderComponent::boundingBox = assetManager.getTexture("collider-box");
     
-    Entity& player{manager.addEntity("player", LayerType::Player)};
-    player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
-    player.addComponent<SpriteComponent>(assetManager.getTexture("chopper-image"), 2, 90, true, false);
-    player.addComponent<KeyboardComponent>("up", "right", "down", "left", "space");
-    player.addComponent<ColliderComponent>("PLAYER", 240, 106, 32, 32);
 
-    Entity& tankEntity{manager.addEntity("tank", LayerType::Enemy)};
-    tankEntity.addComponent<TransformComponent>(150, 495, 0, 0, 32, 32, 1);
-    tankEntity.addComponent<SpriteComponent>(assetManager.getTexture("tank-image"));
-    tankEntity.addComponent<ColliderComponent>("ENEMY", 150, 495, 32, 32);
+    
+    // assetManager.addTexture("tank-image", "./assets/images/tank-big-right.png");
+    // assetManager.addTexture("chopper-image", "./assets/images/chopper-spritesheet.png");
+    // assetManager.addTexture("radar-image", "./assets/images/radar.png");
+    // assetManager.addTexture("jungle-tiletexture", "./assets/tilemaps/jungle.png");
+    // assetManager.addTexture("collider-box", "./assets/images/collision-texture.png");
+    // assetManager.addTexture("heliport-image", "./assets/images/heliport.png");
+    // assetManager.addTexture("projectile-image", "./assets/images/bullet-enemy.png");
+    // assetManager.addFont("charriot-font", "./assets/fonts/charriot.ttf", 14);
 
-    Entity& projectile{manager.addEntity("projectile", LayerType::Projectile)};
-    projectile.addComponent<TransformComponent>(150+16, 495+16, 0, 0, 4, 4, 1);
-    projectile.addComponent<SpriteComponent>(assetManager.getTexture("projectile-image"));
-    projectile.addComponent<ColliderComponent>("PROJECTILE", 150+16, 495+16, 4,4);
-    projectile.addComponent<ProjectileEmitterComponent>(50, 270, 200, true);
+    // map = new Map{assetManager, manager, 2, 32};
+    // map->loadMap("./assets/tilemaps/jungle.map", 25, 20);
 
-    Entity& heliportEntity{manager.addEntity("heliport", LayerType::Obstacle)};
-    heliportEntity.addComponent<TransformComponent>(470, 420, 0, 0, 32, 32, 1);
-    heliportEntity.addComponent<SpriteComponent>(assetManager.getTexture("heliport-image"));
-    heliportEntity.addComponent<ColliderComponent>("LEVEL_COMPLETE", 470, 420, 32, 32);
+   // ColliderComponent::boundingBox = assetManager.getTexture("collider-box");
+    
+    // Entity& player{manager.addEntity("player", LayerType::Player)};
+    // player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
+    // player.addComponent<SpriteComponent>(assetManager.getTexture("chopper-image"), 2, 90, true, false);
+    // //player.addComponent<KeyboardComponent>("up", "right", "down", "left", "space");
+    // player.addComponent<ColliderComponent>("PLAYER", 240, 106, 32, 32);
 
-    Entity& radarEntity{manager.addEntity("radar", LayerType::Ui)};
-    radarEntity.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
-    radarEntity.addComponent<SpriteComponent>(assetManager.getTexture("radar-image"), 8, 150, false, true);
+    // Entity& tankEntity{manager.addEntity("tank", LayerType::Enemy)};
+    // tankEntity.addComponent<TransformComponent>(150, 495, 0, 0, 32, 32, 1);
+    // tankEntity.addComponent<SpriteComponent>(assetManager.getTexture("tank-image"));
+    // tankEntity.addComponent<ColliderComponent>("ENEMY", 150, 495, 32, 32);
 
-    Entity& labelLevelName{manager.addEntity("labelLevelName", LayerType::Ui)};
-    labelLevelName.addComponent<TextLabelComponent>(
-        renderer, assetManager.getFont("charriot-font"), 
-        10, 10, "First Level", "charriot-font", WHITE_COLOR
-    );
+    // Entity& projectile{manager.addEntity("projectile", LayerType::Projectile)};
+    // projectile.addComponent<TransformComponent>(150+16, 495+16, 0, 0, 4, 4, 1);
+    // projectile.addComponent<SpriteComponent>(assetManager.getTexture("projectile-image"));
+    // projectile.addComponent<ColliderComponent>("PROJECTILE", 150+16, 495+16, 4,4);
+    // projectile.addComponent<ProjectileEmitterComponent>(50, 270, 200, true);
 
-    */
+    // Entity& heliportEntity{manager.addEntity("heliport", LayerType::Obstacle)};
+    // heliportEntity.addComponent<TransformComponent>(470, 420, 0, 0, 32, 32, 1);
+    // heliportEntity.addComponent<SpriteComponent>(assetManager.getTexture("heliport-image"));
+    // heliportEntity.addComponent<ColliderComponent>("LEVEL_COMPLETE", 470, 420, 32, 32);
+
+    // Entity& radarEntity{manager.addEntity("radar", LayerType::Ui)};
+    // radarEntity.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
+    // radarEntity.addComponent<SpriteComponent>(assetManager.getTexture("radar-image"), 8, 150, false, true);
+
+    // Entity& labelLevelName{manager.addEntity("labelLevelName", LayerType::Ui)};
+    // labelLevelName.addComponent<TextLabelComponent>(
+    //     renderer, assetManager.getFont("charriot-font"), 
+    //     10, 10, "First Level", "charriot-font", WHITE_COLOR
+    // );
+
+    
 
     //manager.listEntities();
     //std::cout<< tankEntity.hasComponent<SpriteComponent>() << std::endl;
@@ -219,8 +217,10 @@ void Game::render(){
 }
 
 void Game::handleCameraMovement(){
-    Entity& player = manager.getEntity("player");
-    TransformComponent* transform = player.getComponent<TransformComponent>();
+    Entity* player = manager.getEntity("player");
+    if(player == NULL) return;
+
+    TransformComponent* transform = player->getComponent<TransformComponent>();
     camera.x = transform->position.x - (WINDOW_WIDTH / 2);
     camera.y = transform->position.y - (WINDOW_HEIGHT / 2);
 
