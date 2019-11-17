@@ -1,0 +1,1 @@
+https://github.com/ggez/ggez/tree/master/docs/guides

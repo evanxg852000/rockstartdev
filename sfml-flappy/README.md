@@ -1,12 +1,10 @@
 ## SFML Project
 
-https://maksimdan.gitbooks.io/sfml-and-gamedevelopement/content/frame_rate.html
-
-
 ```bash
 brew install sfml
 ```
 
+https://maksimdan.gitbooks.io/sfml-and-gamedevelopement/content/chapter1.html
 
 ## Game loop
 ```cpp
