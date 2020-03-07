@@ -8,6 +8,7 @@ build:
 	-lsfml-graphics \
 	-lsfml-audio \
 	-lsfml-window \
+	-lsfml-network \
 	-lsfml-system;
 
 clean:
