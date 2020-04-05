@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include <array>
+#include <queue>
+#include <algorithm>
 
 #include "rang/rang.hpp"
 
