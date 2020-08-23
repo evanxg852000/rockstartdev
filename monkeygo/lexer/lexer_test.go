@@ -1,8 +1,9 @@
 package lexer
 
 import (
-	"monkeygo/token"
 	"testing"
+
+	"monkeygo/token"
 )
 
 func TestNextToken(t *testing.T) {
@@ -32,7 +33,7 @@ if (5 < 10) {
 `
 
 	tests := []struct {
-		expectedType    token.Type
+		expectedType    token.TokenType
 		expectedLiteral string
 	}{
 		{token.LET, "let"},

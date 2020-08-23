@@ -1,6 +1,6 @@
 package object
 
-func NewEncloseEnvironment(outer *Environment) *Environment {
+func NewEnclosedEnvironment(outer *Environment) *Environment {
 	env := NewEnvironment()
 	env.outer = outer
 	return env

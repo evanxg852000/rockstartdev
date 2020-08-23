@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"hash/fnv"
 	"monkeygo/ast"
+	"monkeygo/code"
 	"strings"
 )
 
@@ -27,6 +28,8 @@ const (
 
 	ARRAY_OBJ = "ARRAY"
 	HASH_OBJ  = "HASH"
+
+	COMPILED_FUNCTION_OBJ = "COMPILED_FUNCTION"
 )
 
 type HashKey struct {
@@ -71,8 +74,7 @@ func (b *Boolean) HashKey() HashKey {
 	return HashKey{Type: b.Type(), Value: value}
 }
 
-type Null struct {
-}
+type Null struct{}
 
 func (n *Null) Type() ObjectType { return NULL_OBJ }
 func (n *Null) Inspect() string  { return "null" }
@@ -111,7 +113,7 @@ func (f *Function) Inspect() string {
 	out.WriteString(strings.Join(params, ", "))
 	out.WriteString(") {\n")
 	out.WriteString(f.Body.String())
-	out.WriteString("\n")
+	out.WriteString("\n}")
 
 	return out.String()
 }
@@ -125,6 +127,7 @@ func (s *String) Inspect() string  { return s.Value }
 func (s *String) HashKey() HashKey {
 	h := fnv.New64a()
 	h.Write([]byte(s.Value))
+
 	return HashKey{Type: s.Type(), Value: h.Sum64()}
 }
 
@@ -139,12 +142,12 @@ type Array struct {
 	Elements []Object
 }
 
-func (a *Array) Type() ObjectType { return ARRAY_OBJ }
-func (a *Array) Inspect() string {
+func (ao *Array) Type() ObjectType { return ARRAY_OBJ }
+func (ao *Array) Inspect() string {
 	var out bytes.Buffer
 
 	elements := []string{}
-	for _, e := range a.Elements {
+	for _, e := range ao.Elements {
 		elements = append(elements, e.Inspect())
 	}
 
@@ -170,7 +173,8 @@ func (h *Hash) Inspect() string {
 
 	pairs := []string{}
 	for _, pair := range h.Pairs {
-		pairs = append(pairs, fmt.Sprintf("%s: %s", pair.Key.Inspect(), pair.Value.Inspect()))
+		pairs = append(pairs, fmt.Sprintf("%s: %s",
+			pair.Key.Inspect(), pair.Value.Inspect()))
 	}
 
 	out.WriteString("{")
@@ -178,4 +182,15 @@ func (h *Hash) Inspect() string {
 	out.WriteString("}")
 
 	return out.String()
+}
+
+type CompiledFunction struct {
+	Instructions  code.Instructions
+	NumLocals     int
+	NumParameters int
+}
+
+func (cf *CompiledFunction) Type() ObjectType { return COMPILED_FUNCTION_OBJ }
+func (cf *CompiledFunction) Inspect() string {
+	return fmt.Sprintf("CompiledFunction[%p]", cf)
 }
