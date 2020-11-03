@@ -1,4 +1,4 @@
-# File Structure
+# Crafting Interpreters (clox)
 
 ## Build
 ```bash 
